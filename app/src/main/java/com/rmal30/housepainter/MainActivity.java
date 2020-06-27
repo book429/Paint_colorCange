@@ -474,9 +474,6 @@ public class MainActivity extends AppCompatActivity {
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(intent, PHOTO_CODE);
-            if(isRotate){
-                imageView.setRotation(imageView.getRotation() - 90);
-            }
 
         }else{
             Toast.makeText(MainActivity.this, "Please enable permission to use external storage", Toast.LENGTH_SHORT).show();
@@ -528,6 +525,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent imageRet
                 //int columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
                 //photoPath = "file://"+new File(cursor.getString(columnIndex)).getAbsolutePath();
                 //cursor.close();
+                if(isRotate){
+                    imageView.setImageDrawable(null);
+                    imageView.setRotation(imageView.getRotation() - 90);
+                }
                 loadImage();
             }
             break;
